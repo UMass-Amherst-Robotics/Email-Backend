@@ -34,9 +34,13 @@ def submitButtonPushed_Contact():
 def submitButtonPushed_Apply():
     if request.method == 'POST':
         info = request.get_json()
-        if 'firstName' in info and 'lastName' in info and 'email' in info and 'questionOne' in info and 'questionTwo' in info and 'questionThree' in info and 'questionFour' in info and 'questionFive' in info:
-                msg = Message('APPLICATION ' + info['firstName'] + ' ' + info['lastName'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
-                msg.body = 'QUESTION 1:' + ' ' + info['question1'] + 'QUESTION 2:' + info['question2'] + 'QUESTION 3:' + info['question3'] + 'QUESTION 4:' + info['question4'] + 'QUESTION 5:' + info['question5']
+        if 'firstName' in info and 'lastName' in info and 'email' in info and 'qOne' in info and 'qTwo' in info and 'qThree' in info and 'qFour' in info and 'qFive' in info:
+                msg = Message('APPLICATION ' + info['firstName'] + ' ' + info['lastName'] + ' - ' + info['email'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
+                msg.body = 'QUESTION 1:' + ' ' + info['qOne'] + 'QUESTION 2:' + info['qTwo'] + 'QUESTION 3:' + info['qThree'] + 'QUESTION 4:' + info['qFour'] + 'QUESTION 5:' + info['q5']
+                mail.send(msg)
+
+                msg = Message('Application Received!', sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
+                msg.body = 'We have received your application ' + info['firstName'] + '! Should you be a good fit for our team we will be sure to reach out to you for an interview! We will try to get back to you within the coming month but this may change so please be patient! Thank you!'
                 mail.send(msg)
                 return "Success", 200
     return "Record not found", 400
