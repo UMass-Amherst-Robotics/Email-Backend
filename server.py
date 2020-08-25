@@ -34,9 +34,9 @@ def submitButtonPushed_Contact():
 def submitButtonPushed_Apply():
     if request.method == 'POST':
         info = request.get_json()
-        if 'firstName' in info and 'lastName' in info and 'email' in info and 'questionOne' in info and 'questionTwo' in info and 'questionThree' in info and 'questionFour' in info and 'questionFive' in info:
-                msg = Message('APPLICATION ' + info['firstName'] + ' ' + info['lastName'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
-                msg.body = 'QUESTION 1:' + ' ' + info['question1'] + 'QUESTION 2:' + info['question2'] + 'QUESTION 3:' + info['question3'] + 'QUESTION 4:' + info['question4'] + 'QUESTION 5:' + info['question5']
-                mail.send(msg)
-                return "Success", 200
+        if 'fName' in info and 'lName' in info and 'email' in info and 'qOne' in info and 'qTwo' in info and 'qThree' in info and 'qFour' in info and 'qFive' in info:
+            msg = Message('[APPLICATION] ' + info['fName'] + ' ' + info['lName'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
+            msg.body = 'QUESTION 1:' + ' ' + info['qOne'] + '\nQUESTION 2:' + info['qTwo'] + '\nQUESTION 3:' + info['qThree'] + '\nQUESTION 4:' + info['qFour'] + '\nQUESTION 5:' + info['qFive']
+            mail.send(msg)
+            return "Success", 200
     return "Record not found", 400
