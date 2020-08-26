@@ -20,8 +20,8 @@ application.config.update(
 UPLOAD_FOLDER = '/uploads'
 ALLOWED_EXTENSIONS = {'pdf'}
 
-mail = Mail(app)
-CORS(app)
+mail = Mail(application)
+CORS(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @application.route("/contact/", methods=['POST'])
@@ -41,7 +41,7 @@ def submitButtonPushed_Apply():
     if request.method == 'POST':
         info = request.get_json()
         if 'firstName' in info and 'lastName' in info and 'email' in info and 'major' in info and 'expGrad' in info and 'GorU' in info and 'qOne' in info and 'qTwo' in info and 'qThree' in info and 'qFour' in info and 'qFive' in info:
-                msg = Message('APPLICATION ' + info['lastName'] + ' ' + info['lastName'] + ' - ' + info['email'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
+                msg = Message('APPLICATION ' + info['firstName'] + ' ' + info['lastName'] + ' - ' + info['email'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
                 msg.body = info['major'] + '\n\n' + info['expGrad'] + '\n\n' + info['GorU'] + '\n\n' + 'QUESTION 1:' + '\n\n' + info['qOne'] + '\n\n' + 'QUESTION 2:' + info['qTwo'] + '\n\n' + 'QUESTION 3:' + info['qThree'] + '\n\n' + 'QUESTION 4:' + info['qFour'] + '\n\n' + 'QUESTION 5:' + info['qFive']
                 mail.send(msg)
 
