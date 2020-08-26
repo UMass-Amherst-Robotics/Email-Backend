@@ -46,7 +46,7 @@ def submitButtonPushed_Apply():
                 mail.send(msg)
 
                 msg = Message('Application Received!', sender="roboticsumass@gmail.com", recipients=[info['email']])
-                msg.body = 'We have received your application ' + info['firstName'] + '! Should you be a good fit for our team we will be sure to reach out to you for an interview! We will try to get back to you within the coming month but this may change so please be patient! Thank you!'
+                msg.body = 'We have received your application ' + info['firstName'] + '! Please reply to this email with your resume. Should you be a good fit for our team we will be sure to reach out to you for an interview! We will try to get back to you within the coming month but this may change so please be patient! Thank you!'
                 mail.send(msg)
                 return "Success", 200
     return "Record not found", 400
