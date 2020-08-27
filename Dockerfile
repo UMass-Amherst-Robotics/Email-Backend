@@ -5,15 +5,14 @@ MAINTAINER UMass Robotics "roboticsumass@gmail.com"
 RUN 	apt-get update -y && \
 	apt-get install -y python-pip python-dev && \
 	pip install --upgrade pip
+	
 
-COPY . /app
+COPY . /src
 
-WORKDIR /app
+WORKDIR /src
 
 RUN pip install -r requirements.txt
 
-EXPOSE 5000
+EXPOSE 8081
 
-ENTRYPOINT [ "python" ]
-
-CMD [ "application.py" ]
+CMD cd /src && python server.py

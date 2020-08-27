@@ -24,6 +24,10 @@ mail = Mail(application)
 CORS(application)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@application.route("/")
+def helloWorld():
+    return "Hello World!", 200
+
 @application.route("/contact/", methods=['POST'])
 def submitButtonPushed_Contact():
     if request.method == 'POST':
@@ -42,11 +46,11 @@ def submitButtonPushed_Apply():
         info = request.get_json()
         if 'firstName' in info and 'lastName' in info and 'email' in info and 'major' in info and 'expGrad' in info and 'GorU' in info and 'qOne' in info and 'qTwo' in info and 'qThree' in info and 'qFour' in info and 'qFive' in info:
                 msg = Message('APPLICATION ' + info['firstName'] + ' ' + info['lastName'] + ' - ' + info['email'], sender="roboticsumass@gmail.com", recipients=["roboticsumass@gmail.com"])
-                msg.body = info['major'] + '\n\n' + info['expGrad'] + '\n\n' + info['GorU'] + '\n\n' + 'QUESTION 1:' + '\n\n' + info['qOne'] + '\n\n' + 'QUESTION 2:' + info['qTwo'] + '\n\n' + 'QUESTION 3:' + info['qThree'] + '\n\n' + 'QUESTION 4:' + info['qFour'] + '\n\n' + 'QUESTION 5:' + info['qFive']
+                msg.body = info['major'] + '\n\n' + info['expGrad'] + '\n\n' + info['GorU'] + '\n\n' + 'QUESTION 1:' + '\n\n' + info['qOne'] + '\n\n' + 'QUESTION 2:' + '\n\n' + info['qTwo'] + '\n\n' + 'QUESTION 3:' + '\n\n' + info['qThree'] + '\n\n' + 'QUESTION 4:' + '\n\n' + info['qFour'] + '\n\n' + 'QUESTION 5:' + '\n\n' + info['qFive']
                 mail.send(msg)
 
                 msg = Message('Application Received!', sender="roboticsumass@gmail.com", recipients=[info['email']])
-                msg.body = 'We have received your application ' + info['firstName'] + '! Please reply to this email with your resume. Should you be a good fit for our team we will be sure to reach out to you for an interview! We will try to get back to you within the coming month but this may change so please be patient! Thank you!'
+                msg.body = 'We have received your application ' + info['firstName'] + '! Please reply to this email with your resume. Should you be a good fit for our team we will be sure to reach out to you for an interview! Please reply to this message with your resume as you as you can! We will try to get back to you within the coming month but this may change so please be patient! \n\n\nAll the best,\nThe UMR Team'
                 mail.send(msg)
                 return "Success", 200
     return "Record not found", 400
@@ -54,3 +58,6 @@ def submitButtonPushed_Apply():
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
