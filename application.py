@@ -60,4 +60,4 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0', debug=True, ssl_context='adhoc')
+    application.run(host='0.0.0.0', debug=False)
