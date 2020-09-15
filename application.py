@@ -50,7 +50,7 @@ def submitButtonPushed_Apply():
                 mail.send(msg)
 
                 msg = Message('Application Received!', sender="roboticsumass@gmail.com", recipients=[info['email']])
-                msg.body = 'We have received your application ' + info['firstName'] + '! Please reply to this email with your resume. Should you be a good fit for our team we will be sure to reach out to you for an interview! Please reply to this message with your resume as you as you can! We will try to get back to you within the coming month but this may change so please be patient! \n\n\nAll the best,\nThe UMR Team'
+                msg.body = 'We have received your application ' + info['firstName'] + '! Should you be a good fit for our team we will be sure to reach out to you for an interview! Please reply to this message with your resume as soon as you can! We will try to get back to you within the coming month but this may change so please be patient! \n\n\nAll the best,\nThe UMR Team'
                 mail.send(msg)
                 return "Success", 200
     return "Record not found", 400
@@ -60,4 +60,4 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    application.run(host='0.0.0.0', debug=True, ssl_context='adhoc')
